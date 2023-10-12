@@ -1,0 +1,20 @@
+{% extends "agendamiento/validation_base.html" %}
+
+{% block title %}
+    Validations
+{% endblock %}
+
+{% block content %}
+    <h1>Validations</h1>
+    <h2><a href={% url "agendamiento:validation_create" %}>Create new Validation</a></h2>
+    <ul>
+    {% for validation in validation_list %}
+        <li><a href={% url "agendamiento:validation_detail" validation.pk %}>{{ validation }}</a> | <a href={% url "agendamiento:validation_update" validation.pk %}>Update</a> | <form style="display:inline;" action={% url "agendamiento:validation_delete" validation.pk %} method="post" onsubmit="return confirm('Are you sure you want to delete {{ validation }}?')">{% csrf_token %}
+    <input type="submit" value="Delete" />
+    </form></li>
+    {% empty %}
+        <li>No Validations yet.</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+

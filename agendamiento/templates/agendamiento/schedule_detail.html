@@ -1,0 +1,14 @@
+{% extends "agendamiento/schedule_base.html" %}
+
+{% block title %}
+    {{ schedule }}
+{% endblock %}
+
+{% block content %}
+    <h1><a href={% url "agendamiento:schedule_list" %}>Schedule</a></h1>
+    <h2>{{ schedule }} | <a href={% url "agendamiento:schedule_update" schedule.pk %}>Update</a> | 
+    <form style="display:inline;" action={% url "agendamiento:schedule_delete" schedule.pk %} method="post" onsubmit="return confirm('Are you sure you want to delete {{ schedule }}?')">{% csrf_token %}
+    <input type="submit" value="Delete" />
+    </form>
+    </h2>
+{% endblock %}

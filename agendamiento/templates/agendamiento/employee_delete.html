@@ -1,0 +1,17 @@
+{% extends "agendamiento/employee_base.html" %}
+
+{% block title %}
+    Delete {{ employee }}
+{% endblock %}
+
+{% block content %}
+<h1>Delete {{ employee }}</h1>
+
+<form action="" method="post">{% csrf_token %}
+    <p>Are you sure you want to delete {{ employee }}?</p>
+    <input type="submit" value="Confirm" />
+</form>
+
+<a href={% url "agendamiento:employee_detail" employee.pk %}>Cancel</a>
+
+{% endblock %}

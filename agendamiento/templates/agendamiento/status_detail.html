@@ -1,0 +1,14 @@
+{% extends "agendamiento/status_base.html" %}
+
+{% block title %}
+    {{ status }}
+{% endblock %}
+
+{% block content %}
+    <h1><a href={% url "agendamiento:status_list" %}>Status</a></h1>
+    <h2>{{ status }} | <a href={% url "agendamiento:status_update" status.pk %}>Update</a> | 
+    <form style="display:inline;" action={% url "agendamiento:status_delete" status.pk %} method="post" onsubmit="return confirm('Are you sure you want to delete {{ status }}?')">{% csrf_token %}
+    <input type="submit" value="Delete" />
+    </form>
+    </h2>
+{% endblock %}

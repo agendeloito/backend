@@ -1,0 +1,20 @@
+{% extends "agendamiento/user_base.html" %}
+
+{% block title %}
+    Users
+{% endblock %}
+
+{% block content %}
+    <h1>Users</h1>
+    <h2><a href={% url "agendamiento:user_create" %}>Create new User</a></h2>
+    <ul>
+    {% for user in user_list %}
+        <li><a href={% url "agendamiento:user_detail" user.pk %}>{{ user }}</a> | <a href={% url "agendamiento:user_update" user.pk %}>Update</a> | <form style="display:inline;" action={% url "agendamiento:user_delete" user.pk %} method="post" onsubmit="return confirm('Are you sure you want to delete {{ user }}?')">{% csrf_token %}
+    <input type="submit" value="Delete" />
+    </form></li>
+    {% empty %}
+        <li>No Users yet.</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+

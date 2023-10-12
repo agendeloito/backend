@@ -1,0 +1,20 @@
+{% extends "agendamiento/employee_base.html" %}
+
+{% block title %}
+    Employees
+{% endblock %}
+
+{% block content %}
+    <h1>Employees</h1>
+    <h2><a href={% url "agendamiento:employee_create" %}>Create new Employee</a></h2>
+    <ul>
+    {% for employee in employee_list %}
+        <li><a href={% url "agendamiento:employee_detail" employee.pk %}>{{ employee }}</a> | <a href={% url "agendamiento:employee_update" employee.pk %}>Update</a> | <form style="display:inline;" action={% url "agendamiento:employee_delete" employee.pk %} method="post" onsubmit="return confirm('Are you sure you want to delete {{ employee }}?')">{% csrf_token %}
+    <input type="submit" value="Delete" />
+    </form></li>
+    {% empty %}
+        <li>No Employees yet.</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+
